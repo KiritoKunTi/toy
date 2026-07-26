@@ -3,7 +3,7 @@ import HeartImg from "../assets/img/heart_input.png"
 import Modal from "./Modal"
 import { CircleImg } from "../App"
 import { motion, AnimatePresence } from "framer-motion"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { addDoc, collection } from "firebase/firestore"
 import { db } from "../firebase"
 
 export const statusList = [
@@ -47,9 +47,13 @@ const RSVPForm = () => {
         if (validateForm()) {
             setIsLoading(true)
             try {
+                const now = new Date()
+                const formattedDate = `${now.getDate().toString().padStart(2, "0")}/${(now.getMonth() + 1).toString().padStart(2, "0")}/${now.getFullYear()} ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`
+
                 await addDoc(collection(db, "responses"), {
                     ...formData,
-                    createdAt: serverTimestamp(),
+                    timestamp: now.getTime(),
+                    createdAt: formattedDate,
                 })
 
                 setIsModalOpen(true)
