@@ -1,11 +1,10 @@
-const CrookedLine = ({ className, color = "#000" }: { className: string, color: string }) => {
+const CrookedLine = ({ className, color = "#000" }) => {
     return (
         <svg
             className={className}
             xmlns="http://www.w3.org/2000/svg"
             width="9.3102mm"
             height="9.1669mm"
-            s
             viewBox="0 0 34.83 34.3"
             style={{
                 shapeRendering: "geometricPrecision",
