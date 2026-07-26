@@ -1,10 +1,16 @@
 import React, { useState } from "react"
 import HeartImg from "../assets/img/heart_input.png"
 import Modal from "./Modal"
-import { CircleImg } from "../App";
-import { motion, AnimatePresence } from "framer-motion";
+import { CircleImg } from "../App"
+import { motion, AnimatePresence } from "framer-motion"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { db } from "../firebase"
 
-export const statusList = [{label: "Келемін", value:  "ACCEPT"}, {label : "Жұбыммен келемін", value: "ACCEPT_WITH_PAIR"}, {label: "Келе алмаймын", value: "NOT_ACCEPT"}]
+export const statusList = [
+    { label: "Келемін", value: "ACCEPT" },
+    { label: "Жұбыммен келемін", value: "ACCEPT_WITH_PAIR" },
+    { label: "Келе алмаймын", value: "NOT_ACCEPT" },
+]
 
 const LoadingSpinner = () => (
     <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -17,6 +23,7 @@ const RSVPForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         attendance: "",
+        comment: "",
     })
     const [errors, setErrors] = useState({})
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,25 +47,13 @@ const RSVPForm = () => {
         if (validateForm()) {
             setIsLoading(true)
             try {
-                const response = await fetch("https://api.oryntap.kz/public/inviter/add", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({...formData, status: formData.attendance})
+                await addDoc(collection(db, "responses"), {
+                    ...formData,
+                    createdAt: serverTimestamp(),
                 })
 
-                if (!response.ok) {
-                    throw new Error('Серверде қате шықты')
-                }
-
-                const data = await response.json()
-                if (data.code === 0) {
-                    setIsModalOpen(true)
-                    setServerError(null)
-                } else {
-                    throw new Error(data.message || 'Белгісіз қате')
-                }
+                setIsModalOpen(true)
+                setServerError(null)
             } catch (error) {
                 setServerError(error.message)
                 setIsModalOpen(true)
@@ -74,6 +69,7 @@ const RSVPForm = () => {
             setFormData({
                 name: "",
                 attendance: "",
+                comment: "",
             })
             setErrors({})
         }
@@ -95,41 +91,30 @@ const RSVPForm = () => {
             <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="relative">
                     <div className="relative">
-                    <input 
-                        type="text" 
-                        placeholder="Есіміңіз" 
-                        value={formData.name} 
-                        onChange={(e) => {
-                            setFormData({ ...formData, name: e.target.value })
-                            if (errors.name) setErrors({ ...errors, name: "" })
+                        <input
+                            type="text"
+                            placeholder="Есіміңіз"
+                            value={formData.name}
+                            onChange={(e) => {
+                                setFormData({ ...formData, name: e.target.value })
+                                if (errors.name) setErrors({ ...errors, name: "" })
                             }}
-                        className={`w-full pr-6 pl-2 py-3 border ${
-                            errors.name ? 'border-red-400' : 'border-gray-300'
-                            } rounded-lg text-2xl focus:outline-none focus:border-blue-400 placeholder:text-lg transition-colors`}
-                            />
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                        <img src={HeartImg} alt="heart-img" className="w-6 h-6 object-contain" />
+                            className={`w-full pr-6 pl-2 py-3 border ${errors.name ? "border-red-400" : "border-gray-300"} rounded-lg text-2xl focus:outline-none focus:border-blue-400 placeholder:text-lg transition-colors`}
+                        />
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                            <img src={HeartImg} alt="heart-img" className="w-6 h-6 object-contain" />
+                        </div>
                     </div>
-                            </div>
                     <AnimatePresence>
                         {errors.name && (
-                            <motion.p
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                className="text-red-500 text-sm mt-1 ml-2 font-montserrat"
-                            >
+                            <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="text-red-500 text-sm mt-1 ml-2 font-montserrat">
                                 {errors.name}
                             </motion.p>
                         )}
                     </AnimatePresence>
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                >
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
                     <div className="text-left ml-4 space-y-1 font-montserrat">
                         <p className="mb-4 text-base">
                             Жұбыңызбен келсеңіз,
@@ -148,8 +133,9 @@ const RSVPForm = () => {
                                         value={option.value}
                                         checked={formData.attendance === option.value}
                                         onChange={(e) => {
-                                            setFormData({ ...formData, attendance: e.target.value })
-                                            if (errors.attendance) setErrors({ ...errors, attendance: "" })
+                                            const selectedOption = statusList.find((o) => o.value === e.target.value)
+                                            setFormData({ ...formData, attendance: e.target.value, comment: selectedOption?.label || "" })
+                                            if (errors.attendance) setErrors({ ...errors, attendance: "", comment: "" })
                                         }}
                                         className="w-5 h-5"
                                     />
@@ -159,12 +145,7 @@ const RSVPForm = () => {
                         </div>
                         <AnimatePresence>
                             {errors.attendance && (
-                                <motion.p
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    className="text-red-500 text-sm mt-2 font-montserrat"
-                                >
+                                <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="text-red-500 text-sm mt-2 font-montserrat">
                                     {errors.attendance}
                                 </motion.p>
                             )}
@@ -172,14 +153,7 @@ const RSVPForm = () => {
                     </div>
                 </motion.div>
 
-                <motion.button
-                    type="submit"
-                    whileTap={{ scale: 0.95 }}
-                    disabled={isLoading}
-                    className={`w-full py-3 px-6 bg-blue-base text-white rounded-full text-lg transition-colors font-montserrat flex items-center justify-center space-x-2 ${
-                        isLoading ? 'opacity-75 cursor-not-allowed' : ''
-                    }`}
-                >
+                <motion.button type="submit" whileTap={{ scale: 0.95 }} disabled={isLoading} className={`w-full py-3 px-6 bg-blue-base text-white rounded-full text-lg transition-colors font-montserrat flex items-center justify-center space-x-2 ${isLoading ? "opacity-75 cursor-not-allowed" : ""}`}>
                     {isLoading ? (
                         <>
                             <LoadingSpinner />
