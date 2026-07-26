@@ -60,7 +60,7 @@ function App() {
 
                     <div className="mt-10 text-center relative">
                         <div data-aos="fade-up">
-                            <h2 className="uppercase font-montserrat text-xl">сіздерді ұлымыз</h2>
+                            <h2 className="uppercase font-montserrat text-xl">сіздерді аяулы қызымыз</h2>
                         </div>
 
                         <CircleImg className="-right-56 -top-24 opacity-15 -z-10" />
@@ -76,13 +76,11 @@ function App() {
 
                             <div data-aos="fade-up">
                                 <p className="font-playfair text-adjust-auto transform origin-center leading-[23px]">
-                                    келініміздің үйлену <br />
-                                    тойына арналған ақ
+                                    ұзату тойына <br />
+                                    арналған салтанатты ақ <br />
+                                    дастарханымыздың қадірлі
                                     <br />
-                                    дастарханымыздың <br />
-                                    қадірлі қонағы болуға
-                                    <br />
-                                    шақырамыз!
+                                    қонағы болуға шақырамыз!
                                 </p>
                             </div>
                         </div>
@@ -90,25 +88,21 @@ function App() {
                         <div data-aos="fade-up">
                             <Divider />
                             <div className="text-xl  font-montserrat">ТОЙ ИЕЛЕРІ:</div>
-                            {/* <div className="text-xl font-playfair">АТА-ӘЖЕСІ</div> */}
-                            <div className="text-8xl font-cursive text-center font-kazak text-blue-base mt-2">
+                            <div className="text-6xl font-cursive text-center font-kazak text-blue-base mt-2">
                                 <span className="relative">
-                                    Шалкар
-                                    <div className="absolute bottom-[25px] -z-1 left-[85px] text-sm">
-                                        <CrookedLine color="#8097c9" className="text-sm w-4 h-4" />
-                                    </div>
+                                    Аманжол
                                 </span>
-                                - Гулжан
+                                - Рита
                             </div>
                         </div>
 
                         <div data-aos="fade-up">
                             <Divider />
                             <div className="text-3xl font-montserrat">ТОЙ САЛТАНАТЫ:</div>
-                            <div className="text-8xl font-kazak text-blue-base mt-2">6 шілде 2025</div>
+                            <div className="text-7xl font-kazak text-blue-base mt-2">25 қазан 2026</div>
                             <div className="text-3xl font-semibold mt-3 flex flex-row justify-around py-1 border mx-auto">
-                                <span>Шілде</span>
-                                <span>2025</span>
+                                <span>Қазан</span>
+                                <span>2026</span>
                             </div>
                             <div className="grid grid-cols-7 gap-1 w-10/12 relative mx-auto text-sm mt-2">
                                 {["ДС", "СС", "СР", "БС", "ЖМ", "СБ", "ЖС"].map((day, index) => (
@@ -116,12 +110,29 @@ function App() {
                                         {day}
                                     </div>
                                 ))}
-                                {Array.from({ length: 32 }, (_, i) => (
-                                    <div key={i} className={`py-1 px-2 rounded-full ${i === 6 ? "relative" : ""}`}>
-                                        {i === 0 ? null : i}
-                                        {i === 6 && <img src={HeartImg} alt="test" className="animate-pulse absolute -top-1 left-1/2 -translate-x-1/2 w-10 h-10 -z-10" />}
-                                    </div>
-                                ))}
+                                {Array.from({ length: 34 }, (_, index) => {
+                                    const day = index - 2
+                                    const isBlank = day <= 0
+                                    const isEvent = day === 25
+                                    const isHoliday = day === 26
+
+                                    return (
+                                        <div
+                                            key={index}
+                                            className={`py-1 px-2 rounded-full ${isEvent ? "relative" : ""} ${isHoliday ? "bg-green-100 text-green-700 border border-green-300" : ""}`}
+                                            title={isHoliday ? "Демалыс" : undefined}
+                                        >
+                                            {isBlank ? null : day}
+                                            {isEvent && (
+                                                <img
+                                                    src={HeartImg}
+                                                    alt="test"
+                                                    className="animate-pulse absolute -top-1 left-1/2 -translate-x-1/2 w-10 h-10 -z-10"
+                                                />
+                                            )}
+                                        </div>
+                                    )
+                                })}
 
                                 <CircleImg className="-right-56 -top-24 opacity-10 -z-10" />
                             </div>
@@ -147,13 +158,13 @@ function App() {
                                 <h3 className="font-playfair text-2xl">Мекен-Жайымыз: </h3>
                                 <div className="border-t border-gray-400 w-1/2 mt-2 mx-auto"></div>
                                 <div className="tn-atom text-adjust-auto transform font-medium origin-center leading-6 uppercase mt-4">
-                                    <span className="font-montserrat">Семей қаласы,</span>
+                                    <span className="font-montserrat">Ақтөбе қаласы,</span>
                                     <br />
-                                    <span className="font-playfair">​Найманбаев көшесі, 228</span>
+                                    <span className="font-playfair">Ораз Тәтеұлы көшесі, 9</span>
                                 </div>
-                                <p className="mt-2 text-blue-base font-playfair text-3xl">"Eкi Жұлдыз"</p>
+                                <p className="mt-2 text-blue-base font-playfair text-3xl">"Royal Palace"</p>
                             </div>
-                            <div id="map" className="mx-2 overflow-hidden rounded-lg border shadow mt-4 h-52" onClick={() => window.open("https://2gis.kz/semey/geo/70000001059047829")}></div>
+                            <div id="map" className="mx-2 overflow-hidden rounded-lg border shadow mt-4 h-52" onClick={() => window.open("https://go.2gis.com/Z69VF")}></div>
                         </div>
                     </div>
                 </div>

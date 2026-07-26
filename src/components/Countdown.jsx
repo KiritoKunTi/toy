@@ -11,7 +11,7 @@ const Countdown = () => {
 
     useEffect(() => {
         const calculateTimeLeft = () => {
-            const targetDate = new Date("2025-07-06T18:00:00+06:00")
+            const targetDate = new Date("2026-10-25T18:00:00+05:00")
             const now = new Date()
             const difference = targetDate - now
 
@@ -42,7 +42,7 @@ const Countdown = () => {
 
     return (
         <div className="bg-blue-base text-white relative px-6 pt-6 pb-14 rounded-lg shadow-lg text-center max-w-md mx-auto">
-            <h2 className="text-8xl leading-[50px] font-kazak font-cursive mb-4">Той салтанатына дейін:</h2>
+            <h2 className="text-7xl leading-[50px] font-kazak font-cursive mb-4">Той салтанатына дейін:</h2>
             <div className="flex justify-center mt-10 gap-4">
                 <TimeBox value={timeLeft.days} label="КҮН" />
                 <span className="text-3xl font-bold">:</span>

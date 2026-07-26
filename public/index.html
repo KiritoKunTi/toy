@@ -5,30 +5,21 @@
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <meta name="theme-color" content="#8097c9" />
-        
-        <!-- Primary Meta Tags -->
-        <meta name="title" content="Заңғар & Бекзада - Үйлену тойына шақыру" />
-        <meta name="description" content="Құрметті ағайын-туыс, құда-жекжат, нағашы-жиендер, дос-жарандар, көршілер және әріптестер! Сіздерді ұлымыз Заңғар мен келініміз Бекзада-ның үйлену тойына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!" />
-        
+                
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
         <!-- <meta property="og:url" content="https://oryntap.kz/" /> -->
-        <meta property="og:title" content="Заңғар & Бекзада - Үйлену тойына шақыру" />
-        <meta property="og:description" content="Құрметті ағайын-туыс, құда-жекжат, нағашы-жиендер, дос-жарандар, көршілер және әріптестер! Сіздерді ұлымыз Заңғар мен келініміз Бекзада-ның үйлену тойына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!" />
         <meta property="og:image" content="%PUBLIC_URL%/preview.png" />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
         <!-- <meta property="twitter:url" content="https://oryntap.kz/" /> -->
-        <meta property="twitter:title" content="Заңғар & Бекзада - Үйлену тойына шақыру" />
-        <meta property="twitter:description" content="Құрметті ағайын-туыс, құда-жекжат, нағашы-жиендер, дос-жарандар, көршілер және әріптестер! Сіздерді ұлымыз Заңғар мен келініміз Бекзада-ның үйлену тойына арналған ақ дастарханымыздың қадірлі қонағы болуға шақырамыз!" />
         <meta property="twitter:image" content="%PUBLIC_URL%/preview.png" />
 
         <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="./js/index.css" />
         
-        <title>Ұзату</title>
+        <title>Ақсауле - Қыз ұзату</title>
         <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
     </head>
     <body>
@@ -40,7 +31,7 @@
 
             DG.then(function () {
                 map = DG.map("map", {
-                    center: [50.422325, 80.238337],
+                    center: [50.275738, 57.136831],
                     zoom: 16,
                     fullscreenControl: false,
                     zoomControl: false,
@@ -52,11 +43,11 @@
                     className: 'custom-marker-icon'
                 })
 
-                DG.marker([50.422325, 80.238337], {
+                DG.marker([50.275773, 57.137053], {
                     icon: customIcon
                 })
                 .addTo(map)
-                .bindPopup('Eкi Жұлдыз')
+                .bindPopup('Royal Palace')
             })
         </script>
         <script src="./js/sakura.js"></script>
