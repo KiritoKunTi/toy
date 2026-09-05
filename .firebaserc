@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "invitation-7c557"
+  },
+  "targets": {
+    "invitation-7c557": {
+      "hosting": {
+        "toy": [
+          "invitation-7c557-2"
+        ]
+      }
+    }
   }
 }

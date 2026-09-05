@@ -50,7 +50,7 @@ const RSVPForm = () => {
                 const now = new Date()
                 const formattedDate = `${now.getDate().toString().padStart(2, "0")}/${(now.getMonth() + 1).toString().padStart(2, "0")}/${now.getFullYear()} ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`
 
-                await addDoc(collection(db, "responses"), {
+                await addDoc(collection(db, "toy_responses"), {
                     ...formData,
                     timestamp: now.getTime(),
                     createdAt: formattedDate,
