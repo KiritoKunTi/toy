@@ -11,7 +11,6 @@ import AOS from "aos"
 import "aos/dist/aos.css"
 import { useEffect } from "react"
 import MusicPlayer from "./components/MusicPlayer"
-import CrookedLine from "./components/CrookedLine"
 
 const Divider = () => {
     return (
@@ -60,7 +59,7 @@ function App() {
 
                     <div className="mt-10 text-center relative">
                         <div data-aos="fade-up">
-                            <h2 className="uppercase font-montserrat text-xl">сіздерді аяулы қызымыз</h2>
+                            <h2 className="uppercase font-montserrat text-xl">сіздерді ұлымыз</h2>
                         </div>
 
                         <CircleImg className="-right-56 -top-24 opacity-15 -z-10" />
@@ -76,11 +75,13 @@ function App() {
 
                             <div data-aos="fade-up">
                                 <p className="font-playfair text-adjust-auto transform origin-center leading-[23px]">
-                                    ұзату тойына <br />
-                                    арналған салтанатты ақ <br />
-                                    дастарханымыздың қадірлі
+                                    келініміздің үйлену <br />
+                                    тойына арналған ақ
                                     <br />
-                                    қонағы болуға шақырамыз!
+                                    дастарханымыздың <br />
+                                    қадірлі қонағы болуға
+                                    <br />
+                                    шақырамыз!
                                 </p>
                             </div>
                         </div>
@@ -90,16 +91,16 @@ function App() {
                             <div className="text-xl  font-montserrat">ТОЙ ИЕЛЕРІ:</div>
                             <div className="text-6xl font-cursive text-center font-kazak text-blue-base mt-2">
                                 <span className="relative">
-                                    Аманжол
+                                    Кенжебек
                                 </span>
-                                - Рита
+                                - Қаламқас
                             </div>
                         </div>
 
                         <div data-aos="fade-up">
                             <Divider />
                             <div className="text-3xl font-montserrat">ТОЙ САЛТАНАТЫ:</div>
-                            <div className="text-7xl font-kazak text-blue-base mt-2">25 қазан 2026</div>
+                            <div className="text-7xl font-kazak text-blue-base mt-2">31 қазан 2026</div>
                             <div className="text-3xl font-semibold mt-3 flex flex-row justify-around py-1 border mx-auto">
                                 <span>Қазан</span>
                                 <span>2026</span>
@@ -113,14 +114,12 @@ function App() {
                                 {Array.from({ length: 34 }, (_, index) => {
                                     const day = index - 2
                                     const isBlank = day <= 0
-                                    const isEvent = day === 25
-                                    const isHoliday = day === 26
+                                    const isEvent = day === 31
 
                                     return (
                                         <div
                                             key={index}
-                                            className={`py-1 px-2 rounded-full ${isEvent ? "relative" : ""} ${isHoliday ? "bg-green-100 text-green-700 border border-green-300" : ""}`}
-                                            title={isHoliday ? "Демалыс" : undefined}
+                                            className={`py-1 px-2 rounded-full ${isEvent ? "relative" : ""}`}
                                         >
                                             {isBlank ? null : day}
                                             {isEvent && (
@@ -158,13 +157,35 @@ function App() {
                                 <h3 className="font-playfair text-2xl">Мекен-Жайымыз: </h3>
                                 <div className="border-t border-gray-400 w-1/2 mt-2 mx-auto"></div>
                                 <div className="tn-atom text-adjust-auto transform font-medium origin-center leading-6 uppercase mt-4">
-                                    <span className="font-montserrat">Ақтөбе қаласы,</span>
+                                    <span className="font-montserrat">Тараз қаласы,</span>
                                     <br />
-                                    <span className="font-playfair">Ораз Тәтеұлы көшесі, 9</span>
+                                    <span className="font-playfair">Төле би даңғылы, 82</span>
                                 </div>
-                                <p className="mt-2 text-blue-base font-playfair text-3xl">"Royal Palace"</p>
+                                <p className="mt-2 text-blue-base font-playfair text-3xl">"Grand royal"</p>
                             </div>
-                            <div id="map" className="mx-2 overflow-hidden rounded-lg border shadow mt-4 h-52" onClick={() => window.open("https://go.2gis.com/Z69VF")}></div>
+                            <div className="relative mx-2 mt-4 overflow-hidden rounded-lg border shadow">
+                                <iframe
+                                    title="Grand royal картасы"
+                                    className="block h-52 w-full border-0"
+                                    src="https://www.openstreetmap.org/export/embed.html?bbox=71.3445%2C42.8985%2C71.3545%2C42.9045&layer=mapnik&marker=42.901444%2C71.34958"
+                                    loading="lazy"
+                                ></iframe>
+                                <a
+                                    className="absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                                    href="https://go.2gis.com/VZ35Z"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    aria-label="Grand royal нысанын 2ГИС-те ашу"
+                                ></a>
+                                <a
+                                    className="block bg-white py-2 text-center text-sm text-blue-base underline"
+                                    href="https://go.2gis.com/VZ35Z"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    2ГИС-те бағыт құру
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -29,36 +29,11 @@
         <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
         <link rel="stylesheet" href="./js/index.css" />
 
-        <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root" class="fade-in"></div>
         <div id="falling-flower"></div>
-        <script type="text/javascript">
-            var map
-
-            DG.then(function () {
-                map = DG.map("map", {
-                    center: [50.275738, 57.136831],
-                    zoom: 16,
-                    fullscreenControl: false,
-                    zoomControl: false,
-                })
-
-                var customIcon = DG.icon({
-                    iconUrl: "./marker-heart.svg",
-                    iconSize: [30, 30],
-                    className: "custom-marker-icon",
-                })
-
-                DG.marker([50.275773, 57.137053], {
-                    icon: customIcon,
-                })
-                    .addTo(map)
-                    .bindPopup("Royal Palace")
-            })
-        </script>
         <script src="./js/sakura.js"></script>
         <script style="background-attachment: fixed">
             var sakura = new Sakura("#falling-flower", {
