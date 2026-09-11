@@ -102,12 +102,12 @@ export function WeddingDetails() {
                 <Countdown />
             </Reveal>
 
-            <Reveal className="mt-12 rounded-2xl border border-champagne/60 px-5 py-6" delay={0.08}>
+            {/* <Reveal className="mt-12 rounded-2xl border border-champagne/60 px-5 py-6" delay={0.08}>
                 <p className="font-sans text-[11px] uppercase tracking-[0.24em] text-ink-muted">Мекен-жай</p>
                 <p className="font-serif mt-3 text-2xl text-ink">{venue.name}</p>
                 <p className="font-sans mt-2 text-sm uppercase tracking-wide text-ink-soft">{venue.city}</p>
                 <p className="font-serif mt-1 text-base text-ink-soft">{venue.address}</p>
-            </Reveal>
+            </Reveal> */}
         </section>
     )
 }

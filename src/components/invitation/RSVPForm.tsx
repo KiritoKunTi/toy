@@ -9,8 +9,6 @@ import { SectionDivider } from "./SectionDivider"
 type FormState = {
     name: string
     attendance: string
-    guestCount: number
-    message: string
 }
 
 export function RSVPForm() {
@@ -18,8 +16,6 @@ export function RSVPForm() {
     const [form, setForm] = useState<FormState>({
         name: "",
         attendance: "",
-        guestCount: 1,
-        message: "",
     })
     const [errors, setErrors] = useState<Record<string, string>>({})
     const [loading, setLoading] = useState(false)
@@ -29,7 +25,6 @@ export function RSVPForm() {
         const next: Record<string, string> = {}
         if (!form.name.trim()) next.name = "Есіміңізді енгізіңіз"
         if (!form.attendance) next.attendance = "Жауапты таңдаңыз"
-        if (form.guestCount < 1) next.guestCount = "Қонақ санын көрсетіңіз"
         setErrors(next)
         return Object.keys(next).length === 0
     }
@@ -47,14 +42,12 @@ export function RSVPForm() {
                 name: form.name.trim(),
                 attendance: form.attendance,
                 comment: selected?.label || "",
-                guestCount: form.guestCount,
-                message: form.message.trim(),
                 timestamp: now.getTime(),
                 createdAt,
             })
 
             setModal({ open: true })
-            setForm({ name: "", attendance: "", guestCount: 1, message: "" })
+            setForm({ name: "", attendance: ""})
             setErrors({})
         } catch (err) {
             setModal({ open: true, error: err instanceof Error ? err.message : "Қате орын алды" })

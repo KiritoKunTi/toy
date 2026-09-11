@@ -6,17 +6,17 @@ export function VenueSection() {
     const { venue, photos } = invitation
 
     return (
-        <section className="relative px-6 py-10 text-center">
-            <SectionDivider />
-            <Reveal>
+        <section className="relative px-6 pt-4 pb-10 text-center">
+            {/* <SectionDivider /> */}
+            {/* <Reveal>
                 <h2 className="font-serif text-3xl tracking-wide text-ink">Орын</h2>
-            </Reveal>
+            </Reveal> */}
 
-            <Reveal variant="imageReveal" className="mt-8 overflow-hidden rounded-2xl border border-champagne/50">
+            {/* <Reveal variant="imageReveal" className="mt-8 overflow-hidden rounded-2xl border border-champagne/50">
                 <Parallax>
                     <img src={photos.venue} alt={venue.name} className="aspect-[5/4] w-full object-cover" />
                 </Parallax>
-            </Reveal>
+            </Reveal> */}
 
             <Reveal className="mt-6">
                 <p className="font-serif text-3xl text-ink">{venue.name}</p>
