@@ -23,10 +23,28 @@ export function MusicButton({ enabled }: MusicButtonProps) {
     useEffect(() => {
         const audio = audioRef.current
         if (!audio || !enabled) return
-        audio
-            .play()
-            .then(() => setPlaying(true))
-            .catch(() => setPlaying(false))
+
+        const startMusic = () => {
+            audio
+                .play()
+                .then(() => setPlaying(true))
+                .catch(() => setPlaying(false))
+        }
+
+        const handleFirstInteraction = () => {
+            startMusic()
+            window.removeEventListener("pointerdown", handleFirstInteraction)
+            window.removeEventListener("keydown", handleFirstInteraction)
+        }
+
+        startMusic()
+        window.addEventListener("pointerdown", handleFirstInteraction, { once: true })
+        window.addEventListener("keydown", handleFirstInteraction, { once: true })
+
+        return () => {
+            window.removeEventListener("pointerdown", handleFirstInteraction)
+            window.removeEventListener("keydown", handleFirstInteraction)
+        }
     }, [enabled])
 
     if (!enabled) return null

@@ -50,7 +50,6 @@ body {
 
 .envelope-overlay {
     background-color: #efe6d8;
-    background-image: url("./assets/img/toile.svg");
     background-repeat: repeat;
     background-size: 150px 150px;
 }
@@ -372,13 +371,16 @@ body {
         0 0 14px rgba(255, 200, 170, 0.18);
 }
 
+.hero-image {
+    object-position: 58% center;
+}
+
 .hero-overlay {
     background: linear-gradient(
         180deg,
-        rgba(47, 42, 36, 0.22) 0%,
-        rgba(47, 42, 36, 0.12) 40%,
-        rgba(247, 241, 232, 0.35) 78%,
-        rgba(247, 241, 232, 1) 100%
+        rgba(28, 17, 12, 0.52) 0%,
+        rgba(28, 17, 12, 0.36) 42%,
+        rgba(28, 17, 12, 0.48) 100%
     );
 }
 

@@ -1,18 +1,18 @@
 import { invitation } from "../../data/invitation"
-import { Reveal, SlowZoom } from "./Reveal"
+import heroImage from "../../assets/img/pexels-rebeca-medeiros-333886492-14213051.jpg"
+import { Reveal } from "./Reveal"
 
 export function HeroSection() {
-    const { couple, eventLabel, date, photos } = invitation
+    const { couple, eventLabel, date } = invitation
 
     return (
-        <section className="relative min-h-[100dvh] overflow-hidden">
-            <div className="absolute inset-0">
-                <SlowZoom className="h-full w-full">
-                    <img src={photos.hero} alt={`${couple.partnerOne} және ${couple.partnerTwo}`} className="h-full w-full object-cover" />
-                </SlowZoom>
-                <div className="hero-overlay absolute inset-0" />
-            </div>
-
+        <section className="relative min-h-[100dvh] overflow-hidden bg-ink">
+            <img
+                src={heroImage}
+                alt={`${couple.partnerOne} және ${couple.partnerTwo}`}
+                className="hero-image absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="hero-overlay absolute inset-0" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[100dvh] flex-col items-center justify-center px-8 pb-24 pt-20 text-center">
                 <Reveal variant="fadeIn">
                     <p className="font-sans text-[11px] uppercase tracking-[0.36em] text-cream">{eventLabel}</p>

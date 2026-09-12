@@ -1,21 +1,13 @@
 import { invitation } from "../../data/invitation"
-import { Reveal, Parallax } from "./Reveal"
-import { SectionDivider } from "./SectionDivider"
+import { Reveal } from "./Reveal"
 
 export function VenueSection() {
-    const { venue, photos } = invitation
+    const { venue } = invitation
 
     return (
         <section className="relative px-6 pt-4 pb-10 text-center">
-            {/* <SectionDivider /> */}
             {/* <Reveal>
                 <h2 className="font-serif text-3xl tracking-wide text-ink">Орын</h2>
-            </Reveal> */}
-
-            {/* <Reveal variant="imageReveal" className="mt-8 overflow-hidden rounded-2xl border border-champagne/50">
-                <Parallax>
-                    <img src={photos.venue} alt={venue.name} className="aspect-[5/4] w-full object-cover" />
-                </Parallax>
             </Reveal> */}
 
             <Reveal className="mt-6">

@@ -1,6 +1,3 @@
-import heroImg from "../assets/img/main.png"
-import photoOne from "../assets/img/1.jpg"
-import photoFlower from "../assets/img/header_flower.png"
 import musicSrc from "../assets/music/test1.mp3"
 
 export type RsvpOption = {
@@ -66,12 +63,6 @@ export type InvitationData = {
     }
     finale: {
         line: string
-    }
-    photos: {
-        hero: string
-        story: string
-        venue: string
-        finale: string
     }
     music: string
     countdownTarget: string
@@ -167,12 +158,6 @@ export const invitation: InvitationData = {
     },
     finale: {
         line: "Келіңіздер, қадірлі қонағымыз болыңыздар!",
-    },
-    photos: {
-        hero: heroImg,
-        story: photoOne,
-        venue: photoFlower,
-        finale: heroImg,
     },
     music: musicSrc,
     countdownTarget: "2026-10-31T18:00:00+05:00",
