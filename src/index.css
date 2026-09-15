@@ -10,89 +10,407 @@
     padding: 0;
 }
 
+html,
+body,
+#root {
+    min-height: 100%;
+}
+
 body {
     margin: 0;
-    font-family: "Montserrat", serif;
-    background-color: #f9faf8;
+    font-family: "DM Sans", Montserrat, sans-serif;
+    background-color: #ebe3d6;
+    color: #3f372f;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    position: relative;
     overflow-x: hidden;
 }
 
-/* Font Classes */
-.font-kazak {
-    font-family: "ALSFinlandiaScript", Arial, sans-serif;
+.paper-sheet {
+    background-color: #fbf7f0;
+    background-image: radial-gradient(rgba(63, 55, 47, 0.028) 0.55px, transparent 0.55px);
+    background-size: 3px 3px;
 }
 
-.font-playfair {
-    font-family: "Playfair Display", serif;
+.paper-grain::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    z-index: 1;
 }
 
-.font-montserrat {
-    font-family: "Montserrat", serif;
+.envelope-perspective {
+    perspective: 1600px;
 }
 
-/* Target scrollbar width */
+.envelope-overlay {
+    background-color: #efe6d8;
+    background-repeat: repeat;
+    background-size: 150px 150px;
+}
+
+.envelope-stage {
+    filter: drop-shadow(0 18px 14px rgba(90, 72, 48, 0.14)) drop-shadow(0 42px 52px rgba(90, 72, 48, 0.2));
+}
+
+.envelope-floor-shadow {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    bottom: -5%;
+    height: 24%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(120, 95, 65, 0.28) 0%, rgba(120, 95, 65, 0) 72%);
+    filter: blur(12px);
+    z-index: 0;
+}
+
+.envelope {
+    border-radius: 2px 2px 11px 11px;
+    isolation: isolate;
+}
+
+.envelope-thickness {
+    position: absolute;
+    left: 1px;
+    right: 1px;
+    bottom: -5px;
+    height: 10px;
+    border-radius: 0 0 12px 12px;
+    background: linear-gradient(180deg, #d8c8b0 0%, #c4b298 100%);
+    box-shadow: 0 3px 6px rgba(70, 55, 40, 0.18);
+    z-index: 0;
+}
+
+.envelope-panel {
+    background-color: #faf4ea;
+    background-image:
+        linear-gradient(155deg, rgba(255, 252, 246, 0.78) 0%, transparent 38%, rgba(150, 125, 90, 0.14) 100%),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(140, 115, 85, 0.022) 2px,
+            rgba(140, 115, 85, 0.022) 3px
+        ),
+        radial-gradient(rgba(105, 85, 60, 0.05) 0.5px, transparent 0.5px);
+    background-size: auto, auto, 2.6px 2.6px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.envelope-back {
+    border-radius: 3px 3px 11px 11px;
+    background-color: #f3eadc;
+    box-shadow:
+        inset 0 0 0 1px rgba(184, 166, 138, 0.4),
+        inset 0 -24px 42px rgba(140, 118, 88, 0.12),
+        0 0 0 1px rgba(255, 250, 242, 0.45);
+}
+
+.envelope-lining {
+    background:
+        linear-gradient(180deg, rgba(230, 220, 200, 0.75) 0%, rgba(212, 196, 168, 0.45) 100%),
+        repeating-linear-gradient(
+            -22deg,
+            transparent,
+            transparent 6px,
+            rgba(184, 166, 138, 0.14) 6px,
+            rgba(184, 166, 138, 0.14) 7px
+        );
+    border-radius: 2px;
+    box-shadow: inset 0 0 30px rgba(140, 118, 88, 0.12);
+    z-index: 1;
+}
+
+.envelope-flap-left {
+    clip-path: polygon(0 0, 100% 49%, 0 100%);
+    background-color: #efe3d1;
+    background-image:
+        linear-gradient(108deg, rgba(255, 250, 242, 0.58) 0%, transparent 34%, rgba(125, 102, 72, 0.26) 100%),
+        radial-gradient(rgba(105, 85, 60, 0.055) 0.5px, transparent 0.5px);
+    background-size: auto, 2.6px 2.6px;
+    box-shadow:
+        inset -16px 0 30px rgba(100, 80, 55, 0.18),
+        inset 0 0 0 1px rgba(165, 145, 115, 0.14);
+    z-index: 4;
+}
+
+.envelope-flap-right {
+    clip-path: polygon(100% 0, 0 49%, 100% 100%);
+    background-color: #eadfcb;
+    background-image:
+        linear-gradient(252deg, rgba(255, 250, 242, 0.5) 0%, transparent 34%, rgba(118, 95, 65, 0.28) 100%),
+        radial-gradient(rgba(105, 85, 60, 0.055) 0.5px, transparent 0.5px);
+    background-size: auto, 2.6px 2.6px;
+    box-shadow:
+        inset 16px 0 30px rgba(100, 80, 55, 0.18),
+        inset 0 0 0 1px rgba(165, 145, 115, 0.14);
+    z-index: 4;
+}
+
+.envelope-flap-bottom {
+    clip-path: polygon(0 100%, 50% 6%, 100% 100%);
+    background-color: #f3e8d8;
+    background-image:
+        linear-gradient(180deg, rgba(255, 250, 242, 0.45) 0%, transparent 36%, rgba(125, 100, 70, 0.2) 100%),
+        radial-gradient(rgba(105, 85, 60, 0.055) 0.5px, transparent 0.5px);
+    background-size: auto, 2.6px 2.6px;
+    box-shadow:
+        inset 0 20px 36px rgba(100, 80, 55, 0.16),
+        inset 0 1px 0 rgba(255, 248, 236, 0.45);
+    z-index: 5;
+}
+
+.envelope-flap {
+    transform-origin: top center;
+    transform-style: preserve-3d;
+}
+
+.envelope-flap-face {
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #fbf6ee;
+    background-image:
+        linear-gradient(180deg, rgba(255, 252, 246, 0.88) 0%, transparent 40%, rgba(135, 110, 78, 0.14) 100%),
+        radial-gradient(rgba(105, 85, 60, 0.05) 0.5px, transparent 0.5px);
+    background-size: auto, 2.6px 2.6px;
+    box-shadow:
+        inset 0 -24px 38px rgba(140, 118, 88, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.envelope-flap-edge {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background: linear-gradient(180deg, transparent 0%, transparent 64%, rgba(110, 88, 60, 0.28) 100%);
+    box-shadow: inset 0 -2px 0 rgba(255, 248, 236, 0.45);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.envelope-flap-back {
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background:
+        linear-gradient(180deg, #e2d5c0 0%, #d0bfa6 55%, #c3b094 100%),
+        radial-gradient(rgba(105, 85, 60, 0.07) 0.5px, transparent 0.5px);
+    background-size: auto, 2.6px 2.6px;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: inset 0 16px 30px rgba(80, 65, 45, 0.24);
+}
+
+.envelope-crease {
+    position: absolute;
+    top: 1%;
+    bottom: 18%;
+    width: 2px;
+    background: linear-gradient(
+        180deg,
+        rgba(130, 108, 78, 0.03) 0%,
+        rgba(130, 108, 78, 0.32) 48%,
+        rgba(130, 108, 78, 0.05) 100%
+    );
+    box-shadow: 1px 0 0 rgba(255, 250, 242, 0.3);
+}
+
+.envelope-crease-l {
+    left: 24%;
+    transform: rotate(16.5deg);
+    transform-origin: top center;
+}
+
+.envelope-crease-r {
+    right: 24%;
+    transform: rotate(-16.5deg);
+    transform-origin: top center;
+}
+
+.envelope-crease-b {
+    top: auto;
+    bottom: 8%;
+    left: 12%;
+    right: 12%;
+    width: auto;
+    height: 1.5px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(130, 108, 78, 0.22) 35%,
+        rgba(130, 108, 78, 0.22) 65%,
+        transparent 100%
+    );
+    box-shadow: none;
+    transform: none;
+}
+
+.envelope-paper-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.09;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    border-radius: 2px 2px 11px 11px;
+    pointer-events: none;
+}
+
+.envelope-fold-shadow {
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    top: 26%;
+    bottom: 20%;
+    background: radial-gradient(
+        ellipse at 50% 45%,
+        rgba(95, 75, 50, 0.2) 0%,
+        rgba(95, 75, 50, 0.08) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.envelope-light {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        148deg,
+        rgba(255, 252, 246, 0.34) 0%,
+        transparent 36%,
+        transparent 60%,
+        rgba(110, 90, 65, 0.1) 100%
+    );
+    border-radius: 2px 2px 11px 11px;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+}
+
+.envelope-ribbon {
+    background: linear-gradient(180deg, #c5b090 0%, #a89068 45%, #8f7855 100%);
+    border-radius: 1px;
+    box-shadow:
+        0 1px 0 rgba(255, 245, 230, 0.35),
+        0 2px 4px rgba(70, 55, 35, 0.2);
+    opacity: 0.72;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.wax-seal-glow {
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 92, 62, 0.35) 0%, rgba(196, 92, 62, 0) 70%);
+    filter: blur(10px);
+    z-index: 0;
+    animation: wax-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes wax-breathe {
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(0.92);
+    }
+    50% {
+        opacity: 0.95;
+        transform: scale(1.08);
+    }
+}
+
+.wax-seal {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    filter:
+        drop-shadow(0 1px 0 rgba(255, 215, 185, 0.3))
+        drop-shadow(0 4px 3px rgba(70, 22, 12, 0.45))
+        drop-shadow(0 16px 22px rgba(110, 35, 22, 0.48))
+        drop-shadow(0 0 28px rgba(196, 92, 62, 0.24));
+    transition: filter 0.25s ease, transform 0.2s ease;
+}
+
+.wax-seal:hover {
+    filter:
+        drop-shadow(0 1px 0 rgba(255, 215, 185, 0.38))
+        drop-shadow(0 5px 4px rgba(70, 22, 12, 0.5))
+        drop-shadow(0 18px 28px rgba(110, 35, 22, 0.55))
+        drop-shadow(0 0 36px rgba(196, 92, 62, 0.35));
+}
+
+.wax-seal:active {
+    transform: scale(0.96);
+    filter:
+        drop-shadow(0 1px 1px rgba(70, 22, 12, 0.55))
+        drop-shadow(0 6px 10px rgba(110, 35, 22, 0.45));
+}
+
+.wax-seal:focus-visible {
+    outline: 2px solid #f7e6d8;
+    outline-offset: 6px;
+    border-radius: 999px;
+}
+
+.wax-monogram {
+    color: #fbe8d8;
+    text-shadow:
+        0 1px 0 rgba(255, 228, 208, 0.45),
+        0 -1px 1px rgba(40, 10, 6, 0.7),
+        0 2px 4px rgba(40, 10, 6, 0.55),
+        0 0 14px rgba(255, 200, 170, 0.18);
+}
+
+.hero-image {
+    object-position: 58% center;
+}
+
+.hero-overlay {
+    background: linear-gradient(
+        180deg,
+        rgba(28, 17, 12, 0.52) 0%,
+        rgba(28, 17, 12, 0.36) 42%,
+        rgba(28, 17, 12, 0.48) 100%
+    );
+}
+
 ::-webkit-scrollbar {
     width: 3px;
 }
 
-/* Background of the scrollbar track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+    background: #efe6d8;
 }
 
-/* Scrollbar handle */
 ::-webkit-scrollbar-thumb {
-    background: #8097c9;
+    background: #c4b49a;
     border-radius: 10px;
 }
 
-/* Hover effect */
-::-webkit-scrollbar-thumb:hover {
-    background: #8097c9;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-#falling-flower {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 360px;
-    z-index: -1;
-    width: 100%;
-}
-
-/* Smooth animation for the scroll indicator */
-@keyframes bounce {
-    0%,
-    100% {
-        transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
-    50% {
-        transform: translateY(-10px);
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
-}
 
-.kazak-letter {
-    position: relative;
-}
-
-.kazak-letter::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 1px;
-    top: 68px;
-    left: 0;
-    background: transparent;
-    border: 1px solid black;
-    transform: rotate(-10deg);
-    border-radius: 5px 0 5px 0;
+    .wax-seal-glow {
+        animation: none;
+    }
 }

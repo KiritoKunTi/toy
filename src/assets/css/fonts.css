@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "kazak";
-    src: url("../fonts/kazak.woff") format("woff"), url("../fonts/kazak.woff") format("woff");
+    font-family: "ALSFinlandiaScript";
+    src: url("../fonts/ALSFinlandiaScript.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: "Playfair Display";
-    src: url("../fonts/PlayfairDisplay-Regular.woff") format("woff"), url("../fonts/PlayfairDisplay-Regular.woff") format("woff");
+    src: url("../fonts/PlayfairDisplay-Regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,15 +16,7 @@
 
 @font-face {
     font-family: "Montserrat";
-    src: url("../fonts/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "ALSFinlandiaScript";
-    src: url("../fonts/ALSFinlandiaScript.otf") format("opentype");
+    src: url("../fonts/Montserrat-Regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
