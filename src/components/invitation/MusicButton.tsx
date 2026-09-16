@@ -13,7 +13,10 @@ export function MusicButton({ enabled }: MusicButtonProps) {
     useEffect(() => {
         const audio = new Audio(invitation.music)
         audio.loop = true
+        audio.autoplay = true
+        audio.preload = "auto"
         audioRef.current = audio
+        audio.load()
         return () => {
             audio.pause()
             audio.src = ""
@@ -25,6 +28,11 @@ export function MusicButton({ enabled }: MusicButtonProps) {
         if (!audio || !enabled) return
 
         const startMusic = () => {
+            if (!audio.paused) {
+                setPlaying(true)
+                return
+            }
+
             audio
                 .play()
                 .then(() => setPlaying(true))

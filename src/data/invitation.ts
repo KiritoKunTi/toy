@@ -1,4 +1,5 @@
-import musicSrc from "../assets/music/test1.mp3"
+// import musicSrc from "../assets/music/test1.mp3"
+import musicSrc from "../assets/music/Kazybek_Kuraiysh_Senimenen.mp3"
 
 export type RsvpOption = {
     label: string
